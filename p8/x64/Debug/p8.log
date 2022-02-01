@@ -1,4 +1,3 @@
 ﻿  p8.cpp
-C:\Users\shayan.khan\source\repos\p8\p8\p8.cpp(136,10): warning C4101: 'snk': unreferenced local variable
 C:\Users\shayan.khan\source\repos\p8\p8\p8.cpp(97): warning C4715: 'datacheck::server_Connect': not all control paths return a value
   p8.vcxproj -> C:\Users\shayan.khan\source\repos\p8\x64\Debug\p8.exe

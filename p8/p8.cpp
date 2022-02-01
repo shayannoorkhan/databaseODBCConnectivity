@@ -114,10 +114,13 @@ struct datacheck {
 			struct datacheck dr;
 				while (SQLFetch(sqlStmtHandle) == SQL_SUCCESS) {
 					for (int j = 1; j <= 4;j++) {
-						SQLGetData(sqlStmtHandle, j, SQL_CHAR, dataRetrieved, SQL_RESULT_LEN, &ptrSqlVersion);
+						SQLRETURN abc=SQLGetData(sqlStmtHandle, j, SQL_CHAR, dataRetrieved, SQL_RESULT_LEN, &ptrSqlVersion);
 						//display query result
 						//std::cout << "\n";
 						//cout << dataRetrieved << endl;
+						/*if (abc == -1) {
+							continue;
+						}*/
 						if (j == 1) {
 							dr.enrollmentId = std::stoi((char*)dataRetrieved);
 						}
@@ -128,12 +131,19 @@ struct datacheck {
 							dr.studentId = std::stoi((char*)dataRetrieved);
 						}
 						if (j == 4) {
-							dr.grade = std::stof((char*)dataRetrieved);
+							if(ptrSqlVersion == SQL_NULL_DATA){
+								dr.grade = -1;
+							}
+							else {
+								dr.grade = std::stof((char*)dataRetrieved);
+							}
+								//cout << abc;
 						}
+						//dataRetrieved
 					}
 						dc.push_back(dr);
 					//free(dr);
-					int snk;
+					//int snk;
 				}
 				std::cout << "\n";
 				//SQLFreeHandle(SQL_HANDLE_STMT, sqlStmtHandle);
